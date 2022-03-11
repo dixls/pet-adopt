@@ -7,3 +7,12 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_ECHO"] = True
 
 connect_db(app)
+
+
+@app.route("/")
+def home_page():
+    """display home page with list of pets"""
+
+    pets = Pet.query.all()
+
+    return render_template("home.html", pets=pets)
