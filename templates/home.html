@@ -5,7 +5,7 @@
 <h1 class="display-2">Adopt a pet!</h1>
 <div class="row">
     {% for pet in pets %}
-    <div class="col">
+    <div class="col mt-3">
         <div class="card">
             <img src="{{pet.photo_url}}" alt="a nice photo of {{pet.name}}" class="card-img-top">
             <div class="card-body">
@@ -14,7 +14,7 @@
                 <p class="card-text">{{pet.notes}}</p>
                 {% endif %}
                 {% if pet.available %}
-                <p class="card-text text-success">{{pet.name}} is available!</p>
+                <p class="card-text text-success"><strong>{{pet.name}} is available!</strong></p>
                 {% endif %}
             </div>
         </div>
