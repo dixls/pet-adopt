@@ -54,5 +54,29 @@ def pet_info(pet_id):
     """displays information about a specific pet"""
 
     pet = Pet.query.get(pet_id)
+    form = AddPetForm(obj=pet)
 
-    return render_template("pet_details.html", pet=pet)
+    if form.validate_on_submit():
+        pet.name = form.name.data
+        pet.species = form.species.data
+        pet.photo_url = form.photo_url.data
+        pet.age = form.age.data
+        pet.notes = form.notes.data
+        pet.available = form.available.data
+        db.session.commit()
+        flash(f"{pet.name} updated!", "success")
+        return render_template("pet_details.html", pet=pet, form=form)
+    else:
+        return render_template("pet_details.html", pet=pet, form=form)
+
+
+@app.route("/<pet_id>/delete/", methods=["POST"])
+def delete_pet(pet_id):
+    """removes given pet from db"""
+
+    pet = Pet.query.get(pet_id)
+    db.session.delete(pet)
+    db.session.commit()
+
+    flash(f"{pet.name} has been deleted", "danger")
+    return redirect("/")
