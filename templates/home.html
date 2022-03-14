@@ -3,11 +3,16 @@
 
 {% block content %}
 <h1 class="display-2">Adopt a pet!</h1>
+{% with messages = get_flashed_messages(with_categories=True) %}
+{% for category, message in messages %}
+<div class="alert alert-{{category}}">{{message}}</div>
+{% endfor %}
+{% endwith %}
 <div class="row">
     {% for pet in pets %}
-    <div class="col mt-3">
+    <div class="col-sm-3 mt-3">
         <div class="card">
-            <img src="{{pet.photo_url}}" alt="a nice photo of {{pet.name}}" class="card-img-top">
+            <a href="/{{pet.id}}/"><img src="{{pet.photo_url}}" alt="a nice photo of {{pet.name}}" class="card-img-top"></a>
             <div class="card-body">
                 <h4 class="card-title">{{pet.name}}</h4>
                 {% if pet.notes %}

@@ -6,7 +6,7 @@
 <form action="/add/" class="mt-3" id="add_pet_form" method="POST">
     {{ form.csrf_token }}
     {% if form.csrf_token.errors %}
-    <div class="warning">You have submitted an invalid CSRF token</div>
+    <div class="invalid-feedback">Your submission token is not valid.</div>
     {% endif %}
     {% for field in form
         if field.widget.input_type != 'hidden' %}
